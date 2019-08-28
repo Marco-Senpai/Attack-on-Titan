@@ -78,16 +78,39 @@ def signup():
 
     return render_template('signup.html')
 
-    @app.route('/quiz', methods=['POST', 'GET'])
-    def quiz():
-        if request.method == 'GET':
-            return render_template('quiz.html')
+@app.route('/quiz', methods=['POST', 'GET'])
+def quiz():
+    if request.method == 'GET':
+        return render_template('quiz.html')
 
-        if request.method == 'POST':
-            question = request.form['question']
-            answer = request.form['answer']
-            question_error = ""
-            answer_error = ""
-            owner = User.query.filter_by(username=session['username']).first()
+    if request.method == 'POST':
+        question = request.form['question']
+        answer = request.form['answer']
+        question_error = ""
+        answer_error = ""
+        owner = User.query.filter_by(username=session['username']).first()
 
-            if len(question) 
+        if len(question)
+
+@app.route('/score', method=['POST'])
+def score():
+    if request.args.get("id"):
+        score_id = request.args.get("id")
+        score = Score.query.get(score_id)
+        return render_template('score.html', score=score)
+    elif request.args.get("user"):
+        user_id = request.query.get("user")
+        user = User.query.filter_by(user_id)
+        score = Score.query.filter_by(owner=user).all()
+        return render_template('score.html', scores=scores)
+    else:
+        score = Score.query.all()
+        return render_template('score.html', title="Attack on Titan", scores=scores)
+
+@app.route('/', methods=['GET'])
+def index():
+    users = User.query.all()
+    return render_template('index.html', title="Attack on Titan", users=users)
+
+if __name__ == '__main__':
+    app.run()

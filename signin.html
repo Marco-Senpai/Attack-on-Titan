@@ -1,0 +1,23 @@
+{% extends "home.html" %}
+
+{% block content %}
+<h1>Sign In</h1>
+<p>If you don't have an account, you can <a href="/enlist">enlist</a> here</p>
+<form action="/signin" method="post">
+    <table>
+        <tr>
+            <td><label for="username">Username</label></td>
+            <td>
+                <input name="username" type="text" value="{{username}}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input name="password" type="password">
+
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

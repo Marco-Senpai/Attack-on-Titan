@@ -49,7 +49,7 @@ def signin():
 
     return render_template('signin.html')
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/enlist', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
         username = request.form['username']
@@ -75,7 +75,7 @@ def signup():
                 session['username'] = username
                 return redirect('/loggeduser')
 
-    return render_template('signup.html')
+    return render_template('enlist.html')
 
 @app.route('/quiz', methods=['POST', 'GET'])
 def quiz():

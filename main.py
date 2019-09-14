@@ -3,16 +3,16 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:swiss@localhost:5000/blogz'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://attack-on-titan:titan@localhost:3306/attack-on-titan'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
-class Quiz(db.Model):
+#class Quiz(db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(1200))
-    answer = db.Column(db.String(400))
-    owner_id = db
+    #id = db.Column(db.Integer, primary_key=True)
+    #question = db.Column(db.String(1200))
+    #answer = db.Column(db.String(400))
+    #owner_id = db
 
 
 class User(db.Model):
@@ -22,21 +22,21 @@ class User(db.Model):
     password = db.Column(db.String(120))
     quizzes = db.relationship('Quiz', backref='owner')
 
-    def __init__(self. username, password):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
 
 @app.before_request
 def require_login():
     allowed_routes = ['signin', 'signup', 'home']
-    if request.endpount not in allowed_routes anud 'username' not in session:
+    if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('signin')
 
 @app.route('/signin', methods=['POST', 'GET'])
 def signin():
     if request.method == 'POST':
-        username = request/form['username']
-        password = request/form['password']
+        username = request.form['username']
+        password = request.form['password']
         user = User.query.filter_by(username=username).first()
 
         if user and user.password == password:
@@ -49,7 +49,7 @@ def signin():
 
     return render_template('signin.html')
 
-@app.route('signup', methods=['POST', 'GET'])
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
         username = request.form['username']
@@ -62,7 +62,6 @@ def signup():
             flash('Incorrect password', 'error')
         elif password != confirm:
             flash('Passwods do not match', 'error')
-        
         else:
             existing_user = user.query.filter_by(username=username).first()
 
@@ -90,9 +89,9 @@ def quiz():
         answer_error = ""
         owner = User.query.filter_by(username=session['username']).first()
 
-        if len(question)
+        
 
-@app.route('/score', method=['POST'])
+@app.route('/score', methods=['POST'])
 def score():
     if request.args.get("id"):
         score_id = request.args.get("id")

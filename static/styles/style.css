@@ -1,0 +1,69 @@
+.navigation ul {
+    margin: 0;
+    padding: 0;
+    text-align: center
+}
+.navigation li {
+    font-weight: 100;
+    letter-spacing: 2px;
+    padding: 20px;
+}
+#banner {
+    background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fshingekinokyojin%2Fimages%2Fb%2Fb8%2FSlider_manga.jpg%2Frevision%2Flatest%2Fscale-to-width-down%2F670%3Fcb%3D20160615110131&imgrefurl=https%3A%2F%2Fattackontitan.fandom.com%2Fwiki%2FAttack_on_Titan_Wiki&docid=pnAkuunkw6uphM&tbnid=YACP2GtOx2xC-M%3A&vet=10ahUKEwii86futejkAhUES6wKHXJbCsMQMwixASgjMCM..i&w=670&h=360&bih=774&biw=735&q=attack%20on%20titan&ved=0ahUKEwii86futejkAhUES6wKHXJbCsMQMwixASgjMCM&iact=mrc&uact=8");
+    background-size: cover;
+    background-position: bottom center;
+    height: 700px;
+    width: 100px;
+}
+
+#banner .content h1 {
+    border: 3px solid white;
+    position: relative;
+    top: 50px;
+    width: 400px;
+    margin: 0 auto;
+}
+
+#main {
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+    width: 400px;
+    height: 100px;
+    overflow: scroll;
+}
+p {
+    height: 120px;
+    background-color: black;
+    width: 180px;
+    color: red;
+    font-size: 300px;
+    padding: 20px 10px;
+    margin-top: 50px;
+
+}
+
+h1 {
+    border: 1px dotted red;
+    color: red;
+    font-size: 14px;
+    line-height: 48px;
+    padding: 20px 30px;
+    margin: 30px 20px;
+    text-align: center;
+    
+}
+
+h2 {
+    border: 1px dotted red;
+    color: blue;
+    font-size: 20px;
+    line-height: 40px;
+    padding: 20px 30px;
+    margin: 30px 20px;
+    text-align: center;
+}
+div {
+    color: blue;
+    font-size: 30px;
+}

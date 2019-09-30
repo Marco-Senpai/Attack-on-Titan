@@ -1,29 +1,25 @@
 <!doctype html>
 <html>
     <head>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
         <meta charset="utf-8">
         {% block head_section %}
         <title>{{title}}</title>
         <style>
-            body { background: url(https://images3.alphacoders.com/653/653529.jpg); background-size: 100%;} 
-        </style>
-    
-        <link rel="stylesheet" href="style.css?v=3.4.1">
-        <link rel="stylesheet" href="../static/css/style.css">
-        <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
-        <link href="css/style.css" rel="stylesheet"/> 
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+                body { background: url(https://images3.alphacoders.com/653/653529.jpg); background-size: 100%;} 
+            </style>
+            
         {% endblock %}
     </head>
-    <div>
-        
-    </div>
+    
 <body>
-<nav>
-    <a href="/">Headquarters</a>
-    <a href="/enlist">Enlist</a>
-    <a href="/signin">Sign In</a>
-    <a href="/signout">At Ease</a>
+<nav class="navigation">
+    <ul>
+        <li><a href="/">Headquarters</a></li>
+        <li><a href="/enlist">Enlist</a></li>
+        <li><a href="/signin">Sign In</a></li>
+        <li><a href="/signout">At Ease</a></li>
+    </ul>
 </nav>
         {% with messages = get_flashed_messages(with_categories=True) %}
         <ul>
@@ -36,6 +32,13 @@
     {% block content %}
 
     {% endblock %}
+    <div id="banner">
+        <div class="content">
+            <h1>Are you ready for the most emmersive trivia app you'll ever see this side of Wall Maria? 
+                Then prepare yourself to give your heart in pursuit of freedom for all of mankind!!</h1>
+            </div>
+        </div>
+
 
 </body>
 </html>

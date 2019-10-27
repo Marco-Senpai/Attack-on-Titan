@@ -33,11 +33,11 @@
     overflow: scroll;
 }
 p {
-    height: 120px;
+    height: 12px;
     background-color: black;
-    width: 180px;
+    width: 18px;
     color: red;
-    font-size: 300px;
+    font-size: 15px;
     padding: 20px 10px;
     margin-top: 50px;
 

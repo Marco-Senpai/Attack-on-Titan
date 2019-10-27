@@ -9,10 +9,10 @@ app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 app.secret_key = 'y2k'
 
-class Quiz(db.model):
-    id = db.Column(db.integer, primary_key=True)
-    question = db.Column(db.string(1200))
-    answer = db.Column(db.string(120))
+class Quiz(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String(1200))
+    answer = db.Column(db.String(120))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, question, answer, owner):
@@ -106,7 +106,7 @@ def enlist():
         elif password != confirm:
             flash('Passwords do not match', 'error')
         else:
-            existing_user = user.query.filter_by(username=username).first()
+            existing_user = User.query.filter_by(username=username).first()
 
             if existing_user:
                 flash("User already exists", 'error')

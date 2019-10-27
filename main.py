@@ -1,19 +1,24 @@
-from flask import Flask, request, redirect, render_template, session, flash
+from flask import Flask, request, redirect, render_template, session, flash 
 from flask_sqlalchemy import SQLAlchemy
+import random, copy
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://attack-on-titan:titan@localhost:3306/attack-on-titan'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
+app.secret_key = 'y2k'
 
-#class Quiz(db.Model):
+class Quiz(db.model):
+    id = db.Column(db.integer, primary_key=True)
+    question = db.Column(db.string(1200))
+    answer = db.Column(db.string(120))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    #id = db.Column(db.Integer, primary_key=True)
-    #question = db.Column(db.String(1200))
-    #answer = db.Column(db.String(400))
-    #owner_id = db
-
+    def __init__(self, question, answer, owner):
+        self.question = question
+        self.answer = answer
+        self.owner = owner
 
 class User(db.Model):
 
@@ -26,11 +31,49 @@ class User(db.Model):
         self.username = username
         self.password = password
 
+
+original_questions = {
+    'What is the main protagonists name?':['Eren','Reiner','Sasha','Connie'],
+    'What do the titans do in the show?':['Eat people','Eat animals','Fight Gods','Work as slaves'],
+    'Where does the story take place?':['Behind a wall','In a warehouse','On the sea','In the mind of the protagonist'],
+
+}
+
+questions = copy.deepcopy(original_questions)
+
+def shuffle(q):
+    selected_keys = []
+    i = 0
+    while i < len(q):
+        current_selection = random.choice(q.keys())
+        if current_selection not in selected_keys:
+            selected_keys.append(current_selection)
+            i = i+1
+    return selected_keys
+
+@app.route('/quiz', methods=['POST', 'GET'])
+def quiz():
+    questions_shuffled = shuffle(questions)
+    for i in questions.keys():
+        random.shuffle(questions[i])
+    return render_template('main.html', q = questions_shuffled, o = questions)
+
+@app.route('/score', methods=['POST'])
+def score():
+    correct = 0
+    for i in questions.keys():
+        answered = request.form[i]
+        if original_questions[i][0] == answered:
+            correct = correct+1
+    return render_template('score.html')
+
+
+
 @app.before_request
 def require_login():
-    allowed_routes = ['signin', 'signup', 'home']
+    allowed_routes = ['signin', 'enlist', 'home','quiz']
     if request.endpoint not in allowed_routes and 'username' not in session:
-        return redirect('signin')
+        return redirect('/signin')
 
 @app.route('/signin', methods=['POST', 'GET'])
 def signin():
@@ -45,12 +88,12 @@ def signin():
             return redirect('/loggeduser')
 
         else:
-            flash('Username and or Passwod is incorrect, or Username does not exist', 'error')
+            flash('Username and or Password is incorrect, or Username does not exist', 'error')
 
     return render_template('signin.html')
 
 @app.route('/enlist', methods=['POST', 'GET'])
-def signup():
+def enlist():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -61,7 +104,7 @@ def signup():
         elif len(password) < 2 or len(password) > 20 or " " in password:
             flash('Incorrect password', 'error')
         elif password != confirm:
-            flash('Passwods do not match', 'error')
+            flash('Passwords do not match', 'error')
         else:
             existing_user = user.query.filter_by(username=username).first()
 
@@ -76,35 +119,9 @@ def signup():
                 return redirect('/loggeduser')
 
     return render_template('enlist.html')
-
-@app.route('/quiz', methods=['POST', 'GET'])
-def quiz():
-    if request.method == 'GET':
-        return render_template('quiz.html')
-
-    if request.method == 'POST':
-        question = request.form['question']
-        answer = request.form['answer']
-        question_error = ""
-        answer_error = ""
-        owner = User.query.filter_by(username=session['username']).first()
-
         
 
-@app.route('/score', methods=['POST'])
-def score():
-    if request.args.get("id"):
-        score_id = request.args.get("id")
-        score = Score.query.get(score_id)
-        return render_template('score.html', score=score)
-    elif request.args.get("user"):
-        user_id = request.query.get("user")
-        user = User.query.filter_by(user_id)
-        score = Score.query.filter_by(owner=user).all()
-        return render_template('score.html', scores=scores)
-    else:
-        score = Score.query.all()
-        return render_template('score.html', title="Attack on Titan", scores=scores)
+
 
 @app.route('/', methods=['GET'])
 def index():

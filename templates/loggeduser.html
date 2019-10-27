@@ -1,0 +1,10 @@
+{% extends home.html %}
+
+{% block content %}
+
+<h1>Welcome Back!"{{ username }}"</h1>
+
+    <h1>Quiz Scores</h1>
+
+        {% for quiz in quizzes %}
+            <h2><a href="./quiz?id={{quiz.id}}">{{quiz.score}}</a></h2>

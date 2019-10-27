@@ -1,0 +1,14 @@
+{% extends "home.html" %}
+
+{% block content %}
+    <h1>Short Quiz</h1>
+    <form action='/quiz' method='POST'>
+        <ol>
+            {% for i in q %}
+                <input type='radio' value='{{i}}' name='{{i}}' />
+            {% endfor %}
+        </ol>
+        <input type='submit' value='submit' />
+    
+    
+    </form>

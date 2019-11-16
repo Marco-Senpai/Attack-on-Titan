@@ -17,7 +17,7 @@
 }
 
 #banner .content h1 {
-    border: 3px solid white;
+    border: 3px solid black;
     position: relative;
     top: 50px;
     width: 400px;
@@ -36,17 +36,17 @@ p {
     height: 12px;
     background-color: black;
     width: 18px;
-    color: red;
-    font-size: 15px;
+    color:purple;
+    font-size: 25px;
     padding: 20px 10px;
     margin-top: 50px;
 
 }
 
 h1 {
-    border: 1px dotted red;
-    color: red;
-    font-size: 14px;
+    border: 1px dotted black;
+    color: turquoise;
+    font-size: 25px;
     line-height: 48px;
     padding: 20px 30px;
     margin: 30px 20px;
@@ -55,15 +55,15 @@ h1 {
 }
 
 h2 {
-    border: 1px dotted red;
-    color: blue;
-    font-size: 20px;
+    border: 1px dotted rgb(70, 9, 17);
+    color: purple;
+    font-size: 25px;
     line-height: 40px;
     padding: 20px 30px;
     margin: 30px 20px;
     text-align: center;
 }
 div {
-    color: blue;
+    color: yellow;
     font-size: 30px;
 }

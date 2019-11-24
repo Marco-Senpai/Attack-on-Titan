@@ -7,6 +7,7 @@
     font-weight: 100;
     letter-spacing: 2px;
     padding: 20px;
+    font-size: 30px;
 }
 #banner {
     background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fshingekinokyojin%2Fimages%2Fb%2Fb8%2FSlider_manga.jpg%2Frevision%2Flatest%2Fscale-to-width-down%2F670%3Fcb%3D20160615110131&imgrefurl=https%3A%2F%2Fattackontitan.fandom.com%2Fwiki%2FAttack_on_Titan_Wiki&docid=pnAkuunkw6uphM&tbnid=YACP2GtOx2xC-M%3A&vet=10ahUKEwii86futejkAhUES6wKHXJbCsMQMwixASgjMCM..i&w=670&h=360&bih=774&biw=735&q=attack%20on%20titan&ved=0ahUKEwii86futejkAhUES6wKHXJbCsMQMwixASgjMCM&iact=mrc&uact=8");
@@ -17,7 +18,7 @@
 }
 
 #banner .content h1 {
-    border: 3px solid black;
+    border: 10px solid black;
     position: relative;
     top: 50px;
     width: 400px;

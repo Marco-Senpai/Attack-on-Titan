@@ -67,10 +67,10 @@ def score():
             correct = correct+1
     return render_template('score.html')
 
-@app.route('/quiz', methods=['POST', 'GET'])
-def quiz():
-    if request.method == 'POST':
-        
+# @app.route('/quiz', methods=['POST', 'GET'])
+# def quiz():
+#     if request.method == 'POST':
+
 
 @app.before_request
 def require_login():

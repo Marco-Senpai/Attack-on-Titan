@@ -32,31 +32,31 @@ class User(db.Model):
         self.password = password
 
 
-original_questions = {
-    'What is the main protagonists name?':['Eren','Reiner','Sasha','Connie'],
-    'What do the titans do in the show?':['Eat people','Eat animals','Fight Gods','Work as slaves'],
-    'Where does the story take place?':['Behind a wall','In a warehouse','On the sea','In the mind of the protagonist'],
+# original_questions = {
+#     'What is the main protagonists name?':['Eren','Reiner','Sasha','Connie'],
+#     'What do the titans do in the show?':['Eat people','Eat animals','Fight Gods','Work as slaves'],
+#     'Where does the story take place?':['Behind a wall','In a warehouse','On the sea','In the mind of the protagonist'],
 
-}
+# }
 
-questions = copy.deepcopy(original_questions)
+# questions = copy.deepcopy(original_questions)
 
-def shuffle(q):
-    selected_keys = []
-    i = 0
-    while i < len(q):
-        current_selection = random.choice(q.keys())
-        if current_selection not in selected_keys:
-            selected_keys.append(current_selection)
-            i = i+1
-    return selected_keys
+# def shuffle(q):
+#     selected_keys = []
+#     i = 0
+#     while i < len(q):
+#         current_selection = random.choice(q.keys())
+#         if current_selection not in selected_keys:
+#             selected_keys.append(current_selection)
+#             i = i+1
+#     return selected_keys
 
-@app.route('/quiz', methods=['POST', 'GET'])
-def quiz():
-    questions_shuffled = shuffle(questions)
-    for i in questions.keys():
-        random.shuffle(questions[i])
-    return render_template('main.html', q = questions_shuffled, o = questions)
+# @app.route('/quiz', methods=['POST', 'GET'])
+# def quiz():
+#     questions_shuffled = shuffle(questions)
+#     for i in questions.keys():
+#         random.shuffle(questions[i])
+#     return render_template('main.html', q = questions_shuffled, o = questions)
 
 @app.route('/score', methods=['POST'])
 def score():
@@ -67,7 +67,10 @@ def score():
             correct = correct+1
     return render_template('score.html')
 
-
+@app.route('/quiz', methods=['POST', 'GET'])
+def quiz():
+    if request.method == 'POST':
+        
 
 @app.before_request
 def require_login():
@@ -121,7 +124,12 @@ def enlist():
     return render_template('enlist.html')
         
 
-
+@app.route('/signout', methods=['GET'])
+def signout():
+    if 'username' in session:
+        del session['username']
+        flash('sayonara')
+        return redirect('/home')
 
 @app.route('/', methods=['GET'])
 def index():
